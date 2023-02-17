@@ -41,7 +41,7 @@ function HWS.MakeWindow()
 	hws.title:SetFont("EsoUi/Common/Fonts/Univers67.otf|18|soft-shadow-thin")
 	hws.title:SetColor(.9, .9, .7, 1)
 	hws.title:SetStyleColor(0, 0, 0, 1)
-	hws.title:SetText("Hello World")
+	hws.title:SetText("Dance moves:")
 	hws.title:SetHidden(not HWS.settings.showtitle)
 	
 	-- Give it a zone label

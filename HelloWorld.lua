@@ -8,6 +8,8 @@
 local wm = GetWindowManager()
 local em = GetEventManager()
 local _
+local isBlocking = false
+local danceCounter = 0
 
 -- create a namespace for HWS by declaring a top-level table that will hold everything else.
 if HWS == nil then HWS = {} end
@@ -40,9 +42,21 @@ function HWS.RefreshWindow()
 	local achievement
 	local searchZone = HWS.StripArticles(HWS.zone)
 	--d("Search zone: "..searchZone)
-	HWS.PopulateWindow(HWS.zone, achievement)
+	--HWS.PopulateWindow(HWS.zone, achievement)
+	HWS.PopulateWindow("Extravaganza", achievement)
 end
 
+-- TEST =========================================================================
+function HWS.OnCombatEvent(eventCode, ActionResult, isError, abilityName, abilityGraphic, ActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
+	local _
+	--55146
+	--21970
+	if abilityId == 55146 or abilityId == 21970 then
+		danceCounter = danceCounter + 1
+	end
+	HWS.PopulateWindow("Dance moves performed : "..danceCounter, _)
+end
+-- TEST =========================================================================
 
 --
 -- StripArticles() removes definite articles from the zone name, from Rare Fish Tracker
@@ -79,8 +93,10 @@ function HWS.Initialize(event, addon)
 	-- make our options menu
 	HWS.MakeMenu()
 
+	-- tst
+	em:RegisterForEvent("Tst_COMBAT", EVENT_COMBAT_EVENT, function(...) HWS.OnCombatEvent(...) end)
 	-- also, do this last, to minimize the chance of problem zone transitions
-	em:RegisterForEvent("HelloWorldStart", EVENT_PLAYER_ACTIVATED, function(...) HWS.RefreshWindow(...) end)
+	--em:RegisterForEvent("HelloWorldStart", EVENT_PLAYER_ACTIVATED, function(...) HWS.RefreshWindow(...) end)
 end
 
 
