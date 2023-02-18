@@ -26,18 +26,14 @@ HWS.defaults = {
 }
 
 function HWS.OnCombatEvent(eventCode, ActionResult, isError, abilityName, abilityGraphic, ActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
-	local _
-	--55146
-	--21970
 	if abilityId == 55146 or abilityId == 21970 then
 		danceCounter = danceCounter + 1
-		HWS.RefreshWindow()
+		HWS.RefreshWindow(danceCounter)
 	end
 end
 
-function HWS.RefreshWindow()
-	local _
-	HWS.PopulateWindow("Dance moves performed : "..danceCounter, _)
+function HWS.RefreshWindow(counter)
+	HWS.PopulateWindow("Dance moves performed : "..counter)
 end
 
 --
@@ -59,7 +55,7 @@ function HWS.Initialize(event, addon)
 	HWS.MakeMenu()
 
 	em:RegisterForEvent("Dancer_CombatEvent", EVENT_COMBAT_EVENT, function(...) HWS.OnCombatEvent(...) end)
-	em:RegisterForEvent("Dancer_Start", EVENT_PLAYER_ACTIVATED, function(...) HWS.RefreshWindow(...) end)
+	em:RegisterForEvent("Dancer_Start", EVENT_PLAYER_ACTIVATED, function(...) HWS.RefreshWindow(0) end)
 end
 
 

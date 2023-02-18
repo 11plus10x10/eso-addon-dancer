@@ -83,13 +83,9 @@ end
 --
 --
 --
-function HWS.PopulateWindow(zone, achievement)
+function HWS.PopulateWindow(zone)
 	if HWS.window == nil then HWS.MakeWindow() end
 	HWS.window.zone:SetText(zone)
-	
-	local lowAlpha = 0.4
-	local highAlpha = 1
-
 	HWS.window:SetHidden(ZO_CompassFrame:IsHidden() or not HWS.settings.shown)
 end
 
