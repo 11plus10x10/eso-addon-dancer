@@ -1,15 +1,15 @@
-; This file is the Hello World Skeleton manifest file.  The details of the file layout can be found at the addon wiki:
+; This file is the Dancer addon manifest file.  The details of the file layout can be found at the addon wiki:
 ; http://wiki.esoui.com/Addon_manifest_%28.txt%29_format
 ;
 ; This file has the basic parts: metadata, comments, library files, source files
 ;
-## Title: Hello World
-## Description: The Hello World ESO addon shows the Zone name and can also be used as a skeleton for starting a new addon.
-## APIVersion: 100035 101031
-## Author: GlassHalfFull
-## Version: 3.7
+## Title: Dancer
+## Description: Addon for having fun.
+## APIVersion: 101036
+## Author: 11+10x10
+## Version: 1.0
 ## DependsOn: LibAddonMenu-2.0>=30
-## SavedVariables: HelloWorldSkeletonSavedVars
+## SavedVariables: DancerSavedVars
 ;
 ; The below lua files are loaded in this order
 ; see http://www.esoui.com/downloads/cat53.html
@@ -21,7 +21,7 @@
 ; debug library, see http://www.esoui.com/downloads/info348-LibDebug.html
 
 ; lua files declared in this order so functions are declared prior to use
-HelloWorldMenu.lua
-HelloWorldWindow.lua
+DancerMenu.lua
+DancerWindow.lua
 bindings.xml
-HelloWorld.lua
+Dancer.lua

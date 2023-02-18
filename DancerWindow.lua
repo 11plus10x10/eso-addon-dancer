@@ -11,7 +11,7 @@ if HWS == nil then HWS = {} end
 --
 function HWS.MakeWindow()
 	-- our primary window
-	HWS.window = wm:CreateTopLevelWindow("HelloWorld")
+	HWS.window = wm:CreateTopLevelWindow("Dancer")
 
     local hws = HWS.window
 	hws:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, HWS.settings.x, HWS.settings.y)
@@ -41,7 +41,7 @@ function HWS.MakeWindow()
 	hws.title:SetFont("EsoUi/Common/Fonts/Univers67.otf|18|soft-shadow-thin")
 	hws.title:SetColor(.9, .9, .7, 1)
 	hws.title:SetStyleColor(0, 0, 0, 1)
-	hws.title:SetText("Dance moves:")
+	hws.title:SetText("Potato Extravaganza:")
 	hws.title:SetHidden(not HWS.settings.showtitle)
 	
 	-- Give it a zone label

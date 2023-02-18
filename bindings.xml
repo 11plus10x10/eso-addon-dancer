@@ -1,7 +1,7 @@
 <Bindings>
 	<Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
-		<Category name="Hello World">
-			<Action name="HELLO_WORLD_TOGGLE">
+		<Category name="Dancer">
+			<Action name="DANCER_TOGGLE">
 				<Up>HWS.ToggleWindow()</Up>
 			</Action>
 		</Category>

@@ -12,9 +12,9 @@ function HWS.MakeMenu()
     -- the panel for the addons menu
 	local panel = {
 		type = "panel",
-		name = "Hello World",
-		displayName = "Hello World",
-		author = "GlassHalfFull",
+		name = "Dancer",
+		displayName = "Dancer",
+		author = "11+10x10",
         version = "" .. HWS.version,
 	}
 
@@ -67,6 +67,6 @@ function HWS.MakeMenu()
 		},
 	}
 
-	menu:RegisterAddonPanel("Hello_World", panel)
-	menu:RegisterOptionControls("Hello_World", options)
+	menu:RegisterAddonPanel("Dancer_", panel)
+	menu:RegisterOptionControls("Dancer_", options)
 end
