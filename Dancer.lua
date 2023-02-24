@@ -1,10 +1,18 @@
 -- define local variables as much as possible, so scope is local
 -- see http://lua-users.org/wiki/ScopeTutorial
-local wm = GetWindowManager()
 local em = GetEventManager()
-local _
-local isBlocking = false
-local danceCounter = 0
+local danceCounter
+
+local ranks = {
+	"Skeptical potato",
+	"Shy potato",
+	"Confident potato",
+	"Outgoing potato",
+	"Enthusiastic potato",
+	"Energetic potato",
+	"Hyper potato"
+}
+local maxRank = ranks[7]
 
 -- create a namespace for HWS by declaring a top-level table that will hold everything else.
 if HWS == nil then HWS = {} end
@@ -25,13 +33,26 @@ HWS.defaults = {
 	shown = true,
 }
 
-function HWS.OnCombatEvent(eventCode, ActionResult, isError, abilityName, abilityGraphic, ActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
-	danceCounter = danceCounter + 1
-	HWS.RefreshWindow(danceCounter)
+local function GetRank(dances)
+	-- plus one because Lua starts indexing at 1 *facepalm.gif*
+	local rank = math.floor(dances / 30) + 1
+	local res = ranks[rank]
+	if res ~= nil then
+		return res
+	else
+		return maxRank
+	end
 end
 
-function HWS.RefreshWindow(counter)
-	HWS.PopulateWindow("Dance moves performed : "..counter)
+function HWS.OnCombatEvent(eventCode, ActionResult, isError, abilityName, abilityGraphic, ActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
+	if IsBlockActive() then
+		danceCounter = danceCounter + 1
+		HWS.RefreshWindow(danceCounter, GetRank(danceCounter))
+	end
+end
+
+function HWS.RefreshWindow(counter, rankTst)
+	HWS.PopulateWindow("Dance moves performed: "..counter, "Rank: "..rankTst)
 end
 
 --
@@ -40,6 +61,7 @@ end
 function HWS.Initialize(event, addon)
     -- filter for just HWS addon event
 	if addon ~= HWS.name then return end
+	danceCounter = 0
 
 	em:UnregisterForEvent("DancerInitialize", EVENT_ADD_ON_LOADED)
 
@@ -54,7 +76,7 @@ function HWS.Initialize(event, addon)
 
 	em:RegisterForEvent("Dancer_CombatEvent", EVENT_COMBAT_EVENT, function(...) HWS.OnCombatEvent(...) end)
 	em:AddFilterForEvent("Dancer_CombatEvent", EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, 55146)
-	em:RegisterForEvent("Dancer_Start", EVENT_PLAYER_ACTIVATED, function(...) HWS.RefreshWindow(0) end)
+	em:RegisterForEvent("Dancer_Start", EVENT_PLAYER_ACTIVATED, function(...) HWS.RefreshWindow(danceCounter, GetRank(danceCounter)) end)
 end
 
 

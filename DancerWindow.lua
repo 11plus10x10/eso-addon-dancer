@@ -56,6 +56,18 @@ function HWS.MakeWindow()
 	hws.zone:SetStyleColor(0, 0, 0, 1)
 	hws.zone:SetText("Zone Name")
 
+	-- TST
+	hws.ranking = wm:CreateControl("Ranking", hws, CT_LABEL)
+	if (HWS.settings.showtitle) then
+		hws.ranking:SetAnchor(TOP, hws.title, BOTTOM, 0, 20)
+	else
+		hws.ranking:SetAnchor(TOP, hws, TOP, 0, 20)
+	end
+	hws.ranking:SetFont("EsoUi/Common/Fonts/Univers67.otf|17|soft-shadow-thin")
+	hws.ranking:SetColor(.9, .9, .7, 1)
+	hws.ranking:SetStyleColor(0, 0, 0, 1)
+	hws.ranking:SetText("Rankings")
+
 	-- make a container for the list entries
 	hws.entries = wm:CreateControl("HWSEntries", hws, CT_CONTROL)
 	hws.entries:SetAnchor(TOP, hws.zone, BOTTOM, 0, 0)
@@ -83,9 +95,11 @@ end
 --
 --
 --
-function HWS.PopulateWindow(zone)
+function HWS.PopulateWindow(dances, rank)
 	if HWS.window == nil then HWS.MakeWindow() end
-	HWS.window.zone:SetText(zone)
+	HWS.window.zone:SetText(dances)
+	HWS.window:SetHidden(ZO_CompassFrame:IsHidden() or not HWS.settings.shown)
+	HWS.window.ranking:SetText(rank)
 	HWS.window:SetHidden(ZO_CompassFrame:IsHidden() or not HWS.settings.shown)
 end
 
