@@ -1,13 +1,13 @@
--- sentry to make sure HWS is declared before use
-if HWS == nil then HWS = {} end
+-- sentry to make sure Dancer is declared before use
+if Dancer == nil then Dancer = {} end
 
 --
 -- Register with LibMenu and ESO
 --
-function HWS.MakeMenu()
+function Dancer.MakeMenu()
     -- load the settings->addons menu library
 	local menu = LibAddonMenu2
-	local set = HWS.settings
+	local set = Dancer.settings
 
     -- the panel for the addons menu
 	local panel = {
@@ -15,7 +15,7 @@ function HWS.MakeMenu()
 		name = "Dancer",
 		displayName = "Dancer",
 		author = "11+10x10",
-        version = "" .. HWS.version,
+        version = "" .. Dancer.version,
 	}
 
     -- this addons entries in the addon menu
@@ -34,8 +34,8 @@ function HWS.MakeMenu()
 			getFunc = function() return set.alpha end,
 			setFunc = function(value) 
 				set.alpha = value
-				HWS.window.bg:SetCenterColor(0, 0, 0, set.alpha / 100)
-				HWS.window.bg:SetEdgeColor(0, 0, 0, set.alpha / 100)
+				Dancer.window.bg:SetCenterColor(0, 0, 0, set.alpha / 100)
+				Dancer.window.bg:SetEdgeColor(0, 0, 0, set.alpha / 100)
 			end,
 			default = 60,
 		},
@@ -46,13 +46,13 @@ function HWS.MakeMenu()
 			getFunc = function() return set.showtitle end,
 			setFunc = function(value)
 				set.showtitle = value
-				HWS.window.title:SetHidden(not set.showtitle)
+				Dancer.window.title:SetHidden(not set.showtitle)
 				if (set.showtitle) then
-					HWS.window.zone:ClearAnchors()
-					HWS.window.zone:SetAnchor(TOP, HWS.window.title, BOTTOM, 0, 5)
+					Dancer.window.zone:ClearAnchors()
+					Dancer.window.zone:SetAnchor(TOP, Dancer.window.title, BOTTOM, 0, 5)
 				else
-					HWS.window.zone:ClearAnchors()
-					HWS.window.zone:SetAnchor(TOP, HWS.window, TOP, 0, 5)
+					Dancer.window.zone:ClearAnchors()
+					Dancer.window.zone:SetAnchor(TOP, Dancer.window, TOP, 0, 5)
 				end
 			end,
 		},

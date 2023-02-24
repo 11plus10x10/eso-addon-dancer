@@ -4,113 +4,113 @@
 
 local wm = GetWindowManager()
 
-if HWS == nil then HWS = {} end
+if Dancer == nil then Dancer = {} end
 
 --
 --
 --
-function HWS.MakeWindow()
+function Dancer.MakeWindow()
 	-- our primary window
-	HWS.window = wm:CreateTopLevelWindow("Dancer")
+	Dancer.window = wm:CreateTopLevelWindow("Dancer")
 
-    local hws = HWS.window
-	hws:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, HWS.settings.x, HWS.settings.y)
-	hws:SetMovable(true)
-	hws:SetHidden(not HWS.settings.shown)
-	hws:SetMouseEnabled(true)
-	hws:SetClampedToScreen(true)
-	hws:SetDimensions(0,0)
-	hws:SetResizeToFitDescendents(true)
-	hws:SetHandler("OnMoveStop", function()
-		HWS.settings.x = hws:GetLeft()
-		HWS.settings.y = hws:GetTop()
+    local dancer = Dancer.window
+	dancer:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, Dancer.settings.x, Dancer.settings.y)
+	dancer:SetMovable(true)
+	dancer:SetHidden(not Dancer.settings.shown)
+	dancer:SetMouseEnabled(true)
+	dancer:SetClampedToScreen(true)
+	dancer:SetDimensions(0,0)
+	dancer:SetResizeToFitDescendents(true)
+	dancer:SetHandler("OnMoveStop", function()
+		Dancer.settings.x = dancer:GetLeft()
+		Dancer.settings.y = dancer:GetTop()
 	end)
 	
 	-- give it a backdground (backdrop) for the frame
-	hws.bg = wm:CreateControl("HWSBackground", hws, CT_BACKDROP)
-	hws.bg:SetAnchorFill(hws)
-	hws.bg:SetCenterColor(0, 0, 0, HWS.settings.alpha / 100)
-	hws.bg:SetEdgeColor(0, 0, 0, HWS.settings.alpha / 100)
-	hws.bg:SetEdgeTexture(nil, 2, 2, 0, 0)
-	hws.bg:SetExcludeFromResizeToFitExtents(true)
-	hws.bg:SetDrawLayer(DL_BACKGROUND)
+	dancer.bg = wm:CreateControl("HWSBackground", dancer, CT_BACKDROP)
+	dancer.bg:SetAnchorFill(dancer)
+	dancer.bg:SetCenterColor(0, 0, 0, Dancer.settings.alpha / 100)
+	dancer.bg:SetEdgeColor(0, 0, 0, Dancer.settings.alpha / 100)
+	dancer.bg:SetEdgeTexture(nil, 2, 2, 0, 0)
+	dancer.bg:SetExcludeFromResizeToFitExtents(true)
+	dancer.bg:SetDrawLayer(DL_BACKGROUND)
 	
 	-- give it a header
-	hws.title = wm:CreateControl("HWSTitle", hws, CT_LABEL)
-	hws.title:SetAnchor(TOP, hws, TOP, 0, 5)
-	hws.title:SetFont("EsoUi/Common/Fonts/Univers67.otf|18|soft-shadow-thin")
-	hws.title:SetColor(.9, .9, .7, 1)
-	hws.title:SetStyleColor(0, 0, 0, 1)
-	hws.title:SetText("Potato Extravaganza:")
-	hws.title:SetHidden(not HWS.settings.showtitle)
+	dancer.title = wm:CreateControl("HWSTitle", dancer, CT_LABEL)
+	dancer.title:SetAnchor(TOP, dancer, TOP, 0, 5)
+	dancer.title:SetFont("EsoUi/Common/Fonts/Univers67.otf|18|soft-shadow-thin")
+	dancer.title:SetColor(.9, .9, .7, 1)
+	dancer.title:SetStyleColor(0, 0, 0, 1)
+	dancer.title:SetText("Potato Extravaganza:")
+	dancer.title:SetHidden(not Dancer.settings.showtitle)
 	
 	-- Give it a zone label
-	hws.zone = wm:CreateControl("HWSZone", hws, CT_LABEL)
-	if (HWS.settings.showtitle) then
-		hws.zone:SetAnchor(TOP, hws.title, BOTTOM, 0, 5)
+	dancer.zone = wm:CreateControl("HWSZone", dancer, CT_LABEL)
+	if (Dancer.settings.showtitle) then
+		dancer.zone:SetAnchor(TOP, dancer.title, BOTTOM, 0, 5)
 	else
-		hws.zone:SetAnchor(TOP, hws, TOP, 0, 5)
+		dancer.zone:SetAnchor(TOP, dancer, TOP, 0, 5)
 	end
-	hws.zone:SetFont("EsoUi/Common/Fonts/Univers67.otf|17|soft-shadow-thin")
-	hws.zone:SetColor(.9, .9, .7, 1)
-	hws.zone:SetStyleColor(0, 0, 0, 1)
-	hws.zone:SetText("Zone Name")
+	dancer.zone:SetFont("EsoUi/Common/Fonts/Univers67.otf|17|soft-shadow-thin")
+	dancer.zone:SetColor(.9, .9, .7, 1)
+	dancer.zone:SetStyleColor(0, 0, 0, 1)
+	dancer.zone:SetText("Zone Name")
 
 	-- TST
-	hws.ranking = wm:CreateControl("Ranking", hws, CT_LABEL)
-	if (HWS.settings.showtitle) then
-		hws.ranking:SetAnchor(TOP, hws.title, BOTTOM, 0, 20)
+	dancer.ranking = wm:CreateControl("Ranking", dancer, CT_LABEL)
+	if (Dancer.settings.showtitle) then
+		dancer.ranking:SetAnchor(TOP, dancer.title, BOTTOM, 0, 20)
 	else
-		hws.ranking:SetAnchor(TOP, hws, TOP, 0, 20)
+		dancer.ranking:SetAnchor(TOP, dancer, TOP, 0, 20)
 	end
-	hws.ranking:SetFont("EsoUi/Common/Fonts/Univers67.otf|17|soft-shadow-thin")
-	hws.ranking:SetColor(.9, .9, .7, 1)
-	hws.ranking:SetStyleColor(0, 0, 0, 1)
-	hws.ranking:SetText("Rankings")
+	dancer.ranking:SetFont("EsoUi/Common/Fonts/Univers67.otf|17|soft-shadow-thin")
+	dancer.ranking:SetColor(.9, .9, .7, 1)
+	dancer.ranking:SetStyleColor(0, 0, 0, 1)
+	dancer.ranking:SetText("Rankings")
 
 	-- make a container for the list entries
-	hws.entries = wm:CreateControl("HWSEntries", hws, CT_CONTROL)
-	hws.entries:SetAnchor(TOP, hws.zone, BOTTOM, 0, 0)
-	hws.entries:SetHidden(false)
-	hws.entries:SetResizeToFitDescendents(true)
+	dancer.entries = wm:CreateControl("HWSEntries", dancer, CT_CONTROL)
+	dancer.entries:SetAnchor(TOP, dancer.zone, BOTTOM, 0, 0)
+	dancer.entries:SetHidden(false)
+	dancer.entries:SetResizeToFitDescendents(true)
 
 	-- add a bit of padding
-	hws.entries:SetResizeToFitPadding(20, 10)
+	dancer.entries:SetResizeToFitPadding(20, 10)
 	
 	-- hide our window when the compass frame gets hidden, if it's not hidden already
 	if ZO_CompassFrame:IsHandlerSet("OnShow") then
 		local oldHandler = ZO_CompassFrame:GetHandler("OnShow")
-		ZO_CompassFrame:SetHandler("OnShow", function(...) oldHandler(...) if HWS.settings.shown then HWS.window:SetHidden(false) end end)
+		ZO_CompassFrame:SetHandler("OnShow", function(...) oldHandler(...) if Dancer.settings.shown then Dancer.window:SetHidden(false) end end)
 	else
-		ZO_CompassFrame:SetHandler("OnShow", function(...) if HWS.settings.shown then HWS.window:SetHidden(false) end end)
+		ZO_CompassFrame:SetHandler("OnShow", function(...) if Dancer.settings.shown then Dancer.window:SetHidden(false) end end)
 	end
 	if ZO_CompassFrame:IsHandlerSet("OnHide") then
 		local oldHandler = ZO_CompassFrame:GetHandler("OnHide")
-		ZO_CompassFrame:SetHandler("OnHide", function(...) oldHandler(...) if HWS.settings.shown then HWS.window:SetHidden(true) end end)
+		ZO_CompassFrame:SetHandler("OnHide", function(...) oldHandler(...) if Dancer.settings.shown then Dancer.window:SetHidden(true) end end)
 	else
-		ZO_CompassFrame:SetHandler("OnHide", function(...) if HWS.settings.shown then HWS.window:SetHidden(true) end end)
+		ZO_CompassFrame:SetHandler("OnHide", function(...) if Dancer.settings.shown then Dancer.window:SetHidden(true) end end)
 	end
 end
 
 --
 --
 --
-function HWS.PopulateWindow(dances, rank)
-	if HWS.window == nil then HWS.MakeWindow() end
-	HWS.window.zone:SetText(dances)
-	HWS.window:SetHidden(ZO_CompassFrame:IsHidden() or not HWS.settings.shown)
-	HWS.window.ranking:SetText(rank)
-	HWS.window:SetHidden(ZO_CompassFrame:IsHidden() or not HWS.settings.shown)
+function Dancer.PopulateWindow(dances, rank)
+	if Dancer.window == nil then Dancer.MakeWindow() end
+	Dancer.window.zone:SetText(dances)
+	Dancer.window:SetHidden(ZO_CompassFrame:IsHidden() or not Dancer.settings.shown)
+	Dancer.window.ranking:SetText(rank)
+	Dancer.window:SetHidden(ZO_CompassFrame:IsHidden() or not Dancer.settings.shown)
 end
 
 
 --
 -- Show or hide the window
 --
-function HWS.ToggleWindow()
-	local ishidden = HWS.window:IsHidden()
+function Dancer.ToggleWindow()
+	local ishidden = Dancer.window:IsHidden()
 	-- refresh the window if we're about to show it
-	if ishidden then HWS.RefreshWindow() end
-	HWS.settings.shown = ishidden
-	HWS.window:SetHidden(not ishidden)
+	if ishidden then Dancer.RefreshWindow() end
+	Dancer.settings.shown = ishidden
+	Dancer.window:SetHidden(not ishidden)
 end
